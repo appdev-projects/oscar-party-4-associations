@@ -19,4 +19,8 @@ class Movie < ApplicationRecord
   validates(:title, presence: true, uniqueness: true)
   validates(:year, presence: true)
   validates(:director_id, presence: true)
+
+  belongs_to(:director, class_name: "Director", foreign_key: "director_id")
+  has_many(:credits, class_name: "Credit", foreign_key: "movie_id")
+  has_many(:cast, through: :credits, source: :actor)
 end
